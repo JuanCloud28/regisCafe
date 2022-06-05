@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    background-image: url(/assets/cafetales12.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 800px;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    width: 400px;
+    gap: 30px;
+    background-color: rgb(253 253 253 / 69%);
+}
+
+.form-group{
+    width: 300px;
+}
+
+.radio{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px dashed var(--regis-cafe);
+    height: 30px;
+}

@@ -1,0 +1,29 @@
+<nav>
+    <div class="logo">
+        <a href="/home">
+            <img [src]="logoPath" alt="HOME">
+        </a>        
+    </div>
+    <ul>
+        <div *ngIf="isLogged; else elseBlock">
+            <li>
+                <a href="">Inicio</a>
+            </li>
+            <li>
+                <a href="">Juan Rodriguez</a>
+            </li>
+            <li>
+                <a href="">Salir</a>
+            </li>
+        </div>
+
+        <ng-template #elseBlock>
+            <li>
+                <a href="/login/login">Sign In</a>
+            </li>
+            <li>
+                <a href="/login/register">Sign Up</a>
+            </li>
+        </ng-template>
+    </ul>
+</nav>
