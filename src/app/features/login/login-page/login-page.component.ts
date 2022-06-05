@@ -10,7 +10,7 @@ import { LoginServicesService } from '../services/login-services.service';
 export class LoginPageComponent implements OnInit {
 
   loginForm = this.fb.group({
-    email: ['', Validators.required],
+    correo: ['', Validators.required],
     password: ['', Validators.required],
   });
 
@@ -21,13 +21,11 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit(){
-    this.loginService.login(this.loginForm.value).subscribe( (data: any)=> {
-      this.completedLogIn(data)
-    },
+    this.loginService.login(this.loginForm.value).subscribe( (data: any) =>  this.completedLogIn(data),
     (error: any) => {                              
       console.error('error caught in component', error)
       alert("Autenticación Fallida");
-    })
+    })    
     console.log(this.loginForm.value)
   }
 

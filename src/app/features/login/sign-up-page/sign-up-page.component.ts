@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { LoginServicesService } from '../services/login-services.service';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -8,14 +9,46 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class SignUpPageComponent implements OnInit {
 
+
   registerForm = this.fb.group({
-    email: ['', Validators.required],
+    correo: ['', Validators.required],
     password: ['', Validators.required],
+    confirmPassword: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private loginService: LoginServicesService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+  }
+
+  submit(){
+    if(this.registerForm.controls['password'].value !== this.registerForm.controls['confirmPassword'].value){
+      alert("Las contraseñas no coinciden")
+      return
+    }
+    const data : FormData = new FormData();
+    data.append("name", this.registerForm.controls['correo'].value);
+    data.append("password",this.registerForm.controls['password'].value)
+    data.append("correo",this.registerForm.controls['correo'].value)
+    data.append("finca","1")
+    data.append("is_recolector", "true")
+    data.append("is_admin","false")
+    data.append("cedula","123456789")
+    data.append("celular","3155484285")
+    data.append("fecha","2000-12-12 11:44:59")
+    this.loginService.register(data).subscribe( (data: any) =>  this.completedLogIn(data),
+    (error: any) => {                              
+      console.error('error caught in component', error)
+      alert("Registro Fallido");
+    })    
+  }
+
+  completedLogIn(data: any) {
+    localStorage.setItem("isAuth", "true");
+    localStorage.setItem("username", data.username);
+    localStorage.setItem("token_access", data.access);
+    localStorage.setItem("token_refresh", data.refresh);
+    alert("Registro Exitoso");
   }
 
 }
