@@ -5,15 +5,15 @@
         </a>        
     </div>
     <ul>
-        <div *ngIf="isLogged; else elseBlock">
+        <div *ngIf="isLogged$; else elseBlock">
             <li>
                 <a href="">Inicio</a>
             </li>
             <li>
-                <a href="">Juan Rodriguez</a>
+                <a href="">{{username}}</a>
             </li>
             <li>
-                <a href="">Salir</a>
+                <a (click)="cerrar()" class="salir">Salir</a>
             </li>
         </div>
 

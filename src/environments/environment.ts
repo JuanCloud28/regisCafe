@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  app: ""
+  app: "https://regiscafe-remote-be.herokuapp.com"
 };
 
 /*

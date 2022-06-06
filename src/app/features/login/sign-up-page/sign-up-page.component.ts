@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginServicesService } from '../services/login-services.service';
 
 @Component({
@@ -16,7 +17,9 @@ export class SignUpPageComponent implements OnInit {
     confirmPassword: ['', Validators.required],
   });
 
-  constructor(private loginService: LoginServicesService, private fb: FormBuilder) { }
+  nombre_usuario :string = "";
+
+  constructor(private loginService: LoginServicesService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +29,7 @@ export class SignUpPageComponent implements OnInit {
       alert("Las contraseñas no coinciden")
       return
     }
+    this.nombre_usuario = this.registerForm.controls['correo'].value.split("@")[0];
     const data : FormData = new FormData();
     data.append("name", this.registerForm.controls['correo'].value);
     data.append("password",this.registerForm.controls['password'].value)
@@ -45,10 +49,15 @@ export class SignUpPageComponent implements OnInit {
 
   completedLogIn(data: any) {
     localStorage.setItem("isAuth", "true");
-    localStorage.setItem("username", data.username);
+    localStorage.setItem("username", this.nombre_usuario);
     localStorage.setItem("token_access", data.access);
     localStorage.setItem("token_refresh", data.refresh);
     alert("Registro Exitoso");
+    this.router.navigate(['home']).then(this.refresh);  
+  }
+
+  refresh(){
+    window.location.reload();
   }
 
 }

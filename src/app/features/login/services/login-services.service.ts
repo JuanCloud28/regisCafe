@@ -10,10 +10,10 @@ export class LoginServicesService {
   constructor(private http:  HttpClient) { }
 
   login(payload: any) : any{
-    return this.http.post<any>(`${environment.app}/login`,payload)
+    return this.http.post<any>(`${environment.app}/login/`,payload)
   }
 
   register(payload: any){
-    return this.http.post<any>(`${environment.app}/signup`,payload)
+    return this.http.post<any>(`${environment.app}/user/`,payload)
   }
 }
